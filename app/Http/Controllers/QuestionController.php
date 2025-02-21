@@ -81,4 +81,9 @@ class QuestionController extends Controller {
         }
         
     }
+
+    public function destroy(int $id) {
+        Question::destroy($id);
+        return Redirect::route('questions.index');
+    }
 }

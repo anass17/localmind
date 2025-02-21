@@ -46,7 +46,11 @@
                 </div>
                 <div class="space-x-3">
                     <a href="{{ route('questions.edit', $question->id) }}" class="text-gray-800 font-medium">Edit</a>
-                    <a href="{{ route('questions.destroy', $question->id) }}" class="text-red-500 font-semibold">Delete</a>
+                    <form action="{{ route('questions.destroy', $question->id) }}" method="POST" style="display: inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-red-500 font-semibold">Delete</button>
+                    </form>
                 </div>
             </div>
             <form action="{{ route('answers.store') }}" method="POST" class="mt-5 border-t border-gray-300 pt-3">
