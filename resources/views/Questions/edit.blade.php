@@ -7,8 +7,18 @@
 <div class="container mx-auto p-4 max-w-xl pt-8">
     <h1 class="text-2xl font-bold mb-6 text-center">Edit an Existing Question</h1>
     
-    <form method="POST" action="{{ route('questions.update') }}">
+    <form method="POST" action="{{ route('questions.update', $question->id) }}">
+        @method('PUT')
+
         @csrf
+
+        @error('data')
+            <div class="text-center px-3 rounded bg-red-100 border-red-200 mb-4 py-4">
+                {{ $message }}
+            </div>
+        @enderror
+
+        <input type="hidden" name="question_id" value="{{ $question->id }}" required>
 
         <!-- Question Title -->
         <div class="mb-4">
