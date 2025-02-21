@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
+use App\Models\User;
 use App\Models\Question;
 
 class QuestionController extends Controller {
@@ -47,6 +48,7 @@ class QuestionController extends Controller {
 
     public function show(int $id) {
         $question = Question::find($id);
-        return view('Questions.show', compact('question'));
+        $author = User::find($question -> user_id);
+        return view('Questions.show', compact('question', 'author'));
     }
 }
