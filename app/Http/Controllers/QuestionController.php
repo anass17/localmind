@@ -8,13 +8,11 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
-use App\Models\User;
 use App\Models\Question;
-use App\Models\Answer;
 
 class QuestionController extends Controller {
     public function index() {
-        $questions = Question::all();
+        $questions = Question::with('user') -> get();
         return view('Questions.index', compact('questions'));
     }
 
@@ -49,5 +47,10 @@ class QuestionController extends Controller {
     public function show(int $id) {
         $question = Question::with('answers.user')->find($id);
         return view('Questions.show', compact('question'));
+    }
+
+    public function edit(int $id) {
+        $question = Question::with('user')->find($id);
+        return view('Questions.edit', compact('question'));
     }
 }
