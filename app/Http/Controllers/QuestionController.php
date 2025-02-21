@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect;
@@ -11,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 
 use App\Models\User;
 use App\Models\Question;
+use App\Models\Answer;
 
 class QuestionController extends Controller {
     public function index() {
@@ -47,8 +47,7 @@ class QuestionController extends Controller {
     }
 
     public function show(int $id) {
-        $question = Question::find($id);
-        $author = User::find($question -> user_id);
-        return view('Questions.show', compact('question', 'author'));
+        $question = Question::with('answers.user')->find($id);
+        return view('Questions.show', compact('question'));
     }
 }

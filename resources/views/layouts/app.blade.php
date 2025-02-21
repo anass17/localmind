@@ -8,9 +8,9 @@
 </head>
 <body class="bg-blue-100">
     <header>
-        <nav class="bg-gray-900 text-white p-4">
+        <nav class="bg-gray-900 text-white p-6">
             <div class="max-w-7xl mx-auto flex items-center justify-between">
-                <div class="text-white text-2xl font-bold">Logo</div>
+                <div class="text-white text-2xl font-bold">LocalMind</div>
                 <div class="hidden md:flex space-x-4">
                     <a href="#" class="text-white hover:text-gray-300">Home</a>
                     <a href="#" class="text-white hover:text-gray-300">About</a>
