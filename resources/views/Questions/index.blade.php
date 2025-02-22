@@ -5,7 +5,7 @@
 @section('content')
 <div class="flex min-h-screen">
 
-    <div class="w-1/4 p-6 bg-white border-r border-gray-300" >
+    <div class="w-1/4 p-6 bg-white border-r border-gray-300 top-0 sticky h-screen" >
         <a href="{{ route('questions.create') }}" class="block py-3 rounded bg-gray-700 text-white text-center w-full mb-8">Add New Question</a>
 
         <div class="h-px bg-gray-300 w-1/2 mb-7 mx-auto"></div>
@@ -17,16 +17,21 @@
             <input type="text" name="search" placeholder="Search..." class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-6" value="{{ request('search') }}">
 
             <label for="city" class="block mb-2 text-sm font-medium text-gray-700">City</label>
-            <select name="city" id="city" class="w-full px-4 py-2 border border-gray-300 rounded-lg">
-                <option value="">All Cities</option>
-                <option value="New York" {{ request('city') == 'New York' ? 'selected' : '' }}>New York</option>
-                <option value="Los Angeles" {{ request('city') == 'Los Angeles' ? 'selected' : '' }}>Los Angeles</option>
-                <option value="Chicago" {{ request('city') == 'Chicago' ? 'selected' : '' }}>Chicago</option>
-                <!-- Add more cities as necessary -->
+            <select name="city" id="city" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                <option value="" selected>Select a city</option>
+                @foreach ($moroccanCities as $city)
+                    <option value="{{ $city }}">{{ $city }}</option>
+                @endforeach
             </select>
+
+            
 
             <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded mt-6">Apply Filters</button>
         </form>
+
+        <script>
+            document.querySelector('#city').value = "{{ isset($_GET['city']) ? $_GET['city'] : '' }}";
+        </script>
     </div>
 
     <div class="w-3/4 px-10 py-8">

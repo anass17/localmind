@@ -11,9 +11,24 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Question;
 
 class QuestionController extends Controller {
-    public function index() {
-        $questions = Question::with('user') -> paginate(5);
-        return view('Questions.index', compact('questions'));
+    public function index(Request $request) {
+
+        $city = request('city') ? request('city') : '';
+
+        $moroccanCities = config('cities');
+        // $questions = Question::with('user') -> paginate(5);
+        $questions = Question::with('user')
+        ->where(function ($query) {
+
+            $search = request('search') ? request('search') : '';
+
+            $query->where('title', 'like', '%' . $search . '%')
+                  ->orWhere('content', 'like', '%' . $search . '%');
+        })
+        ->where('location', 'like', '%' . $city . '%')
+        ->paginate(5);
+
+        return view('Questions.index', compact('questions', 'moroccanCities'));
     }
 
     public function create() {
