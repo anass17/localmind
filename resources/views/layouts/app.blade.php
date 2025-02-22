@@ -7,15 +7,15 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-blue-100">
+
     <header>
         <nav class="bg-gray-900 text-white p-6">
             <div class="max-w-7xl mx-auto flex items-center justify-between">
-                <div class="text-white text-2xl font-bold">LocalMind</div>
+                <a href="{{ route('questions.index') }}" class="text-white text-2xl font-bold">LocalMind</a>
                 <div class="hidden md:flex space-x-4">
-                    <a href="#" class="text-white hover:text-gray-300">Home</a>
-                    <a href="#" class="text-white hover:text-gray-300">About</a>
-                    <a href="#" class="text-white hover:text-gray-300">Services</a>
-                    <a href="#" class="text-white hover:text-gray-300">Contact</a>
+                    <span class="text-white mr-5">{{ Session::get('full_name') }}</span>
+                    <a href="{{ route('questions.index') }}" class="text-white hover:text-gray-300">Questions</a>
+                    <a href="{{ route('logout') }}" class="text-white hover:text-gray-300">Logout</a>
                 </div>
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden">

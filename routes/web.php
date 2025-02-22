@@ -11,6 +11,7 @@ Route::resource('answers', AnswerController::class)->only('store');
 Route::view('/', 'login');
 Route::view('/login', 'login');
 Route::view('/register', 'register');
+Route::get('/logout', [AuthController::class, 'logout']) -> name('logout');
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);

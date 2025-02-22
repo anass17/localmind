@@ -71,29 +71,10 @@ class AuthController extends Controller {
         return Redirect::to('/questions');
     }
 
-    // public function logout() {
+    public function logout() {
 
-    //     $validator = Validator::make($request->all(), [
-    //         'email' => 'required|email',
-    //         'password' => 'required|min:8', 
-    //     ]);
+        Session::forget('user_id', 'email', 'full_name');
 
-    //     if ($validator->fails()) {
-    //         return Redirect::back();
-    //     }
-
-    //     $user = User::where('email', $_POST['email']) -> first();
-        
-    //     if ($user && Hash::check($_POST['password'], $user -> password)) {
-
-    //         Session::put('user_id', $user -> id);
-    //         Session::put('email', $user -> email);
-    //         Session::put('full_name', $user -> full_name);
-
-    //         return Redirect::to('/questions');
-
-    //     } else {
-    //         return Redirect::back();
-    //     }
-    // }
+        return Redirect::to('/login');
+    }
 }
