@@ -6,15 +6,16 @@
 <div class="flex min-h-screen">
 
     <div class="w-1/4 p-6 bg-white border-r border-gray-300" >
-        <h2 class="text-xl font-semibold mb-4">Filter & Sort</h2>
+        <a href="{{ route('questions.create') }}" class="block py-3 rounded bg-gray-700 text-white text-center w-full mb-8">Add New Question</a>
+
+        <div class="h-px bg-gray-300 w-1/2 mb-7 mx-auto"></div>
+
+        <h2 class="text-xl font-semibold mb-6 text-center">Filter</h2>
 
         <!-- Search -->
         <form action="{{ route('questions.index') }}" method="GET" class="mb-6">
-            <input type="text" name="search" placeholder="Search..." class="w-full px-4 py-2 border border-gray-300 rounded-lg" value="{{ request('search') }}">
-        </form>
+            <input type="text" name="search" placeholder="Search..." class="w-full px-4 py-2 border border-gray-300 rounded-lg mb-6" value="{{ request('search') }}">
 
-        <!-- Filter by City -->
-        <form action="{{ route('questions.index') }}" method="GET" class="mb-6">
             <label for="city" class="block mb-2 text-sm font-medium text-gray-700">City</label>
             <select name="city" id="city" class="w-full px-4 py-2 border border-gray-300 rounded-lg">
                 <option value="">All Cities</option>
@@ -23,18 +24,8 @@
                 <option value="Chicago" {{ request('city') == 'Chicago' ? 'selected' : '' }}>Chicago</option>
                 <!-- Add more cities as necessary -->
             </select>
-        </form>
 
-        <!-- Sort by Date or Distance -->
-        <form action="{{ route('questions.index') }}" method="GET">
-            <div class="flex justify-between items-center mb-6">
-                <label for="sort_by" class="text-sm font-medium text-gray-700">Sort By</label>
-                <select name="sort_by" id="sort_by" class="w-1/2 px-4 py-2 border border-gray-300 rounded-lg">
-                    <option value="date" {{ request('sort_by') == 'date' ? 'selected' : '' }}>Date (Newest)</option>
-                    <option value="distance" {{ request('sort_by') == 'distance' ? 'selected' : '' }}>Distance</option>
-                </select>
-            </div>
-            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg">Apply Filters</button>
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded mt-6">Apply Filters</button>
         </form>
     </div>
 
@@ -63,6 +54,11 @@
             </div>
 
         @endforeach
+
+
+        <div>
+            {{ $questions->links() }}
+        </div>
 
     </div>
 </div>

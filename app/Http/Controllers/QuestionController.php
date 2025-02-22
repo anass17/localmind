@@ -12,12 +12,15 @@ use App\Models\Question;
 
 class QuestionController extends Controller {
     public function index() {
-        $questions = Question::with('user') -> get();
+        $questions = Question::with('user') -> paginate(5);
         return view('Questions.index', compact('questions'));
     }
 
     public function create() {
-        return view('Questions.create');
+
+        $moroccanCities = config('cities');
+
+        return view('Questions.create', compact('moroccanCities'));
     }
 
     public function store(Request $request) {
