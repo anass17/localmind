@@ -44,14 +44,18 @@
                         <span>{{ $question->answers->count() }}</span>
                     </div>
                 </div>
-                <div class="space-x-3">
-                    <a href="{{ route('questions.edit', $question->id) }}" class="text-gray-800 font-medium">Edit</a>
-                    <form action="{{ route('questions.destroy', $question->id) }}" method="POST" style="display: inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="text-red-500 font-semibold">Delete</button>
-                    </form>
-                </div>
+
+                @if (Session::get('user_id') == $question->user->id)
+                    <div class="space-x-3">
+                        <a href="{{ route('questions.edit', $question->id) }}" class="text-gray-800 font-medium">Edit</a>
+                        <form action="{{ route('questions.destroy', $question->id) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-500 font-semibold">Delete</button>
+                        </form>
+                    </div>
+                @endif
+                
             </div>
             <form action="{{ route('answers.store') }}" method="POST" class="mt-5 border-t border-gray-300 pt-3">
                 @csrf
